@@ -111,5 +111,5 @@ The repository remains **private** for security reasons, as per project requirem
 
 ---
 
-### License
-This project is licensed under the MIT License.
+### Note
+For security reasons the credentials to the database have been removed from the application.properties

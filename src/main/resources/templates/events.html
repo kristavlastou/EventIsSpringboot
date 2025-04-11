@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARTY</title>
+    <style>
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #6a0dad;
+        }   
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+            padding: 20px;
+            background-color: #6a0dad;
+        }
+
+        .grid-item {
+            height: 350px;
+            background-size: cover;
+            background-position: center;
+            color: rgb(255, 255, 255);
+            font-size: 6em;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .grid-item span {
+            opacity: 0.5;
+        }
+        .grid-item-1 {
+            background-image: url('/images/party.jpg');
+        }
+        
+        .events-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .events-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px; 
+        }
+
+        .event-box-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .event-box {
+            background-color: #690289; 
+            padding: 20px; 
+            border-radius: 5px; 
+            text-align: center; 
+            width: 30%; 
+            height: 150px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        
+        .events-column h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 3em;
+        }
+
+        
+        .filter-button {
+            background-color: #fff;
+            color: #6a0dad;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        
+        .filter-panel {
+            display: none;
+            background-color: #690289;
+            padding: 15px;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 600px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-panel label {
+            display: block;
+            margin: 10px 0;
+        }
+        
+        .filter-panel input, .filter-panel select {
+            margin: 5px 0;
+            padding: 5px;
+            width: 100%;
+        }
+
+       
+        .no-events-message {
+            display: none;
+            color: #130303;
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+        .event-card {
+         width: 250px;
+         border-radius: 8px;
+         overflow: hidden;
+         box-shadow: 0 4px 12px rgba(128, 0, 128, 0.2); 
+         text-align: center;
+         font-family: Arial, sans-serif;
+         background-color: #f3e5f5; 
+         transition: transform 0.3s;
+         margin-bottom: 25px;
+      }
+
+      .event-card:hover {
+         transform: scale(1.05);
+         box-shadow: 0 6px 16px rgba(98, 0, 125, 0.4); 
+      }
+
+      
+      .event-image {
+         position: relative;
+         width: 100%;
+         height: 200px;
+         overflow: hidden;
+         background-size: contain; 
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .event-image img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         object-position: center;
+         filter: brightness(90%); 
+      }
+
+     
+      .event-overlay {
+         position: absolute;
+         top: 10px;
+         left: 10px;
+         background-color: rgba(75, 0, 130, 0.8); 
+         color: #e1bee7; 
+         padding: 4px 8px;
+         border-radius: 4px;
+         font-size: 12px;
+      }
+
+  
+      .event-info {
+         padding: 12px;
+      }
+
+      .event-title {
+         font-size: 18px;
+         font-weight: bold;
+         color: #6a1b9a; 
+         margin-bottom: 8px;
+      }
+
+      .event-city {
+         font-size: 16px;
+         color: #6a1b9a; 
+         margin-bottom: 6px;
+      }
+
+      .event-date {
+         font-size: 18px;
+         font-weight: bold;
+         color: #9c27b0; 
+      }
+
+
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-item grid-item-1">
+            <span class="item-text">EVENTS</span>
+        </div>
+    </div>
+    <hr>
+    
+    <div class="events-section">
+        <div class="events-column">
+            <button class="filter-button" onclick="toggleFilterPanel()">filters</button>
+
+            <div class="filter-panel" id="filterPanel">
+                <h2>filters</h2>
+                
+                <label for="dateFilter">Date:</label>
+                <input type="date" id="dateFilter" name="dateFilter">
+
+                <label for="placeFilter">Place:</label>
+                <select id="placeFilter" name="placeFilter">
+                    <option value="">Select a city</option>
+                    <option value="Athens">Athens</option>
+                    <option value="Thessaloniki">Thessaloniki</option>
+                    <option value="Patra">Patra</option>
+                    <option value="Ioannina">Ioannina</option>
+                    <option value="Chania">Chania</option>
+                    <option value="Rethymno">Rethymno</option>
+                    <option value="Volos">Volos</option>
+                </select>
+
+                <label for="priceFilter">Price:</label>
+                <input type="number" id="priceFilter" name="priceFilter" placeholder="Enter maximum price">
+
+                <button onclick="applyFilters()">Apply</button>
+            </div>
+
+            <h1><b>EVENTS</b></h1>
+            
+            <div class="no-events-message" id="noEventsMessage">There are no available events</div>
+
+            <div class="event-box-container">
+                <div th:each="event : ${events}" class="event-card" 
+                    th:data-event="${event.name}" 
+                    th:data-date="${event.date}" 
+                    th:data-place="${event.city}" 
+                    th:data-price="${event.price}">
+
+                    <a th:href="@{/events/{id}(id=${event.eventID})}" style="display: block; text-decoration: none;">
+                        <div class="event-image">
+                            <img th:src="@{/images/party.jpg}" alt="Event Image">
+                        </div>
+                        <div class="event-info">
+                            <p class="event-title" th:text="${event.name}"></p>
+                            <p class="event-city" th:text="${event.city}"></p>
+                            <p class="event-date" th:text="${event.date}"></p>
+                        </div>
+                    </a>
+                </div>
+            </div>   
+
+        </div>
+    </div>
+
+    <script>
+        function toggleFilterPanel() {
+            const filterPanel = document.getElementById("filterPanel");
+            filterPanel.style.display = filterPanel.style.display === "none" ? "block" : "none";
+        }
+
+        function applyFilters() {
+            const dateFilter = document.getElementById("dateFilter").value;
+            const placeFilter = document.getElementById("placeFilter").value;
+            const priceFilter = document.getElementById("priceFilter").value;
+
+            const eventCards = document.querySelectorAll(".event-card");
+            let hasVisibleEvents = false;
+
+            eventCards.forEach(card => {
+                const eventDate = card.getAttribute("data-date");
+                const eventPlace = card.getAttribute("data-place");
+                const eventPrice = parseInt(card.getAttribute("data-price"));
+
+                let displayEvent = true;
+
+                if (dateFilter && eventDate !== dateFilter) {
+                    displayEvent = false;
+                }
+                if (placeFilter && eventPlace !== placeFilter) {
+                    displayEvent = false;
+                }
+                if (priceFilter && eventPrice > parseInt(priceFilter)) {
+                    displayEvent = false;
+                }
+
+                card.style.display = displayEvent ? "flex" : "none";
+                if (displayEvent) {
+                    hasVisibleEvents = true;
+                }
+            });
+
+            document.getElementById("noEventsMessage").style.display = hasVisibleEvents ? "none" : "block";
+        }
+    </script>
+</body>
+</html>
